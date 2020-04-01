@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgrd"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="277dp"
+        android:layout_height="75dp"
+        android:background="@color/colorBox"
+        android:text="@string/counter"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/colorText"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewCounter"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.534" />
+
+    <TextView
+        android:id="@+id/textViewCounter"
+        android:layout_width="149dp"
+        android:layout_height="84dp"
+        android:layout_marginTop="176dp"
+        android:background="@color/colorBox"
+        android:text="@string/zero"
+        android:textAlignment="center"
+        android:textColor="@color/colorText"
+        android:textSize="60sp"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/buttonPlusOne"
+        android:layout_width="100dp"
+        android:layout_height="89dp"
+        android:background="@color/colorBox"
+        android:text="@string/plusOne"
+        android:textAlignment="center"
+        android:textColor="@color/colorText"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.226"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCounter"
+        app:layout_constraintVertical_bias="0.216" />
+
+    <Button
+        android:id="@+id/buttonMinusOne"
+        android:layout_width="100dp"
+        android:layout_height="89dp"
+        android:layout_marginStart="40dp"
+        android:background="@color/colorBox"
+        android:text="@string/minusOne"
+        android:textAlignment="center"
+        android:textColor="@color/colorText"
+        android:textSize="45sp"
+        app:layout_constraintBottom_toBottomOf="@+id/buttonPlusOne"
+        app:layout_constraintStart_toEndOf="@+id/buttonPlusOne"
+        app:layout_constraintTop_toTopOf="@+id/buttonPlusOne"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/buttonDataRecovery"
+        android:layout_width="100dp"
+        android:layout_height="89dp"
+        android:layout_marginTop="44dp"
+        android:background="@color/colorBox"
+        android:text="@string/zero"
+        android:textAlignment="center"
+        android:textColor="@color/colorText"
+        android:textSize="45sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonPlusOne"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/buttonPlusOne"
+        app:layout_constraintTop_toBottomOf="@+id/buttonPlusOne" />
+
+    <Button
+        android:id="@+id/buttonReset"
+        android:layout_width="100dp"
+        android:layout_height="89dp"
+        android:layout_marginTop="44dp"
+        android:background="@color/colorBox"
+        android:text="@string/zero"
+        android:textAlignment="center"
+        android:textColor="@color/colorText"
+        android:textSize="45sp"
+        app:layout_constraintEnd_toEndOf="@+id/buttonMinusOne"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/buttonDataRecovery"
+        app:layout_constraintTop_toBottomOf="@+id/buttonMinusOne" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
