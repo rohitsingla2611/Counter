@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +13,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TextView textViewCounter;
     Button buttonPlusOne, buttonReset, buttonDataRecovery, buttonMinusOne;
     int count = 0, valueDataRecovery = 0;
+    long backKeyPressedTime;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +24,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     void initViews() {
-        textViewCounter = (TextView) findViewById(R.id.textViewCounter);
-        buttonPlusOne = (Button) findViewById(R.id.buttonPlusOne);
-        buttonReset = (Button) findViewById(R.id.buttonReset);
-        buttonDataRecovery = (Button) findViewById(R.id.buttonDataRecovery);
-        buttonMinusOne = (Button) findViewById(R.id.buttonMinusOne);
+        textViewCounter = findViewById(R.id.textViewCounter);
+        buttonPlusOne = findViewById(R.id.buttonPlusOne);
+        buttonReset = findViewById(R.id.buttonReset);
+        buttonDataRecovery = findViewById(R.id.buttonDataRecovery);
+        buttonMinusOne = findViewById(R.id.buttonMinusOne);
 
         buttonPlusOne.setOnClickListener(this);
         buttonReset.setOnClickListener(this);
@@ -60,5 +63,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (backKeyPressedTime + 2000 > System.currentTimeMillis()) {
+            super.onBackPressed();
+            return;
+        } else {
+            Toast.makeText(this, "Press again to Exit", Toast.LENGTH_SHORT).show();
+        }
+        backKeyPressedTime = System.currentTimeMillis();
     }
 }
