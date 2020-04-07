@@ -1,5 +1,7 @@
 package rohitsingla.rdrock.counttimes;
 
+import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,11 +12,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public static final String SHARED_PREFS = "sharedPrefs";
+    public static final String COUNTER_VALUE = "counterValue";
     TextView textViewCounter;
+    String text = "0";
     Button buttonPlusOne, buttonReset, buttonDataRecovery, buttonMinusOne;
     int count = 0, valueDataRecovery = 0;
     long backKeyPressedTime;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +38,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonReset.setOnClickListener(this);
         buttonDataRecovery.setOnClickListener(this);
         buttonMinusOne.setOnClickListener(this);
+        loadData();
+        updateCounter();
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.buttonPlusOne) {
@@ -44,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             valueDataRecovery = count;
             textViewCounter.setText("" + count);
             buttonDataRecovery.setText("" + valueDataRecovery);
+            saveData();
 
         } else if (v.getId() == R.id.buttonMinusOne) {
             if (count > 0) {
@@ -62,6 +70,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             count = valueDataRecovery;
 
         }
+
+    }
+
+    public void saveData() {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        editor.putString(COUNTER_VALUE, textViewCounter.getText().toString());
+        editor.apply();
+
+        Toast.makeText(this, "DATA SAVED SUCCESSFULLY", Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    public void loadData() {
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        text = sharedPreferences.getString(COUNTER_VALUE, "0");
+
+    }
+
+    public void updateCounter() {
+        textViewCounter.setText(text);
+        buttonDataRecovery.setText(text);
+        count = Integer.parseInt(textViewCounter.getText().toString());
+        valueDataRecovery = count;
 
     }
 
