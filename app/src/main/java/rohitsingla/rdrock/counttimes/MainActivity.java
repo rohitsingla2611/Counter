@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String COUNTER_VALUE = "counterValue";
     TextView textViewCounter;
-    String text = "0";
+    String textSaved;
     Button buttonPlusOne, buttonReset, buttonDataRecovery, buttonMinusOne;
     int count = 0, valueDataRecovery = 0;
     long backKeyPressedTime;
@@ -80,20 +80,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editor.putString(COUNTER_VALUE, textViewCounter.getText().toString());
         editor.apply();
 
-        Toast.makeText(this, "DATA SAVED SUCCESSFULLY", Toast.LENGTH_SHORT).show();
-
-
     }
 
     public void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        text = sharedPreferences.getString(COUNTER_VALUE, "0");
+        textSaved = sharedPreferences.getString(COUNTER_VALUE, "0");
 
     }
 
     public void updateCounter() {
-        textViewCounter.setText(text);
-        buttonDataRecovery.setText(text);
+        textViewCounter.setText(textSaved);
+        buttonDataRecovery.setText(textSaved);
         count = Integer.parseInt(textViewCounter.getText().toString());
         valueDataRecovery = count;
 
