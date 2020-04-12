@@ -16,7 +16,7 @@
         android:textAllCaps="true"
         android:textColor="@color/colorText"
         android:textSize="60sp"
-        app:layout_constraintBottom_toTopOf="@+id/textViewCounter"
+        app:layout_constraintBottom_toTopOf="@+id/editTextCounter"
         app:layout_constraintEnd_toEndOf="parent"
 
         app:layout_constraintHorizontal_bias="0.506"
@@ -24,16 +24,19 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.534" />
 
-    <TextView
-        android:id="@+id/textViewCounter"
+    <EditText
+        android:id="@+id/editTextCounter"
         android:layout_width="149dp"
         android:layout_height="84dp"
         android:layout_marginTop="176dp"
         android:background="@color/colorBox"
         android:text="@string/zero"
+        android:imeOptions=""
+        android:inputType="number"
         android:textAlignment="center"
         android:textColor="@color/colorText"
         android:textSize="60sp"
+        android:maxLength="3"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -53,7 +56,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.226"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCounter"
+        app:layout_constraintTop_toBottomOf="@+id/editTextCounter"
         app:layout_constraintVertical_bias="0.216" />
 
     <Button

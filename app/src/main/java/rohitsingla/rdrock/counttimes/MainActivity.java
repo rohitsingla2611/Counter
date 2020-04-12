@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String COUNTER_VALUE = "counterValue";
-    TextView textViewCounter;
+    EditText editTextCounter;
     String textSaved;
     Button buttonPlusOne, buttonReset, buttonDataRecovery, buttonMinusOne;
     int count = 0, valueDataRecovery = 0;
@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     void initViews() {
-        textViewCounter = findViewById(R.id.textViewCounter);
+        editTextCounter = findViewById(R.id.editTextCounter);
         buttonPlusOne = findViewById(R.id.buttonPlusOne);
         buttonReset = findViewById(R.id.buttonReset);
         buttonDataRecovery = findViewById(R.id.buttonDataRecovery);
@@ -46,38 +46,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("SetTextI18n")
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.buttonPlusOne) {
-            count++;
-            valueDataRecovery = count;
-            textViewCounter.setText("" + count);
-            buttonDataRecovery.setText("" + valueDataRecovery);
-            saveData();
+        switch (v.getId()) {
+            case R.id.editTextCounter:
+                count = Integer.parseInt(editTextCounter.getText().toString());
 
-        } else if (v.getId() == R.id.buttonMinusOne) {
-            if (count > 0) {
-                count--;
+                return;
+
+            case R.id.buttonPlusOne:
+                count++;
                 valueDataRecovery = count;
-                textViewCounter.setText("" + count);
+                editTextCounter.setText("" + count);
                 buttonDataRecovery.setText("" + valueDataRecovery);
-            }
-        } else if (v.getId() == R.id.buttonReset) {
-            count = 0;
-            textViewCounter.setText("" + count);
+                saveData();
+                return;
 
-        } else if (v.getId() == R.id.buttonDataRecovery) {
+            case R.id.buttonMinusOne:
+                if (count > 0) {
+                    count--;
+                    valueDataRecovery = count;
+                    editTextCounter.setText("" + count);
+                    buttonDataRecovery.setText("" + valueDataRecovery);
+                }
+                return;
+            case R.id.buttonReset:
+                count = 0;
+                editTextCounter.setText("" + count);
+                return;
+            case R.id.buttonDataRecovery:
 
-            textViewCounter.setText("" + valueDataRecovery);
-            count = valueDataRecovery;
+                editTextCounter.setText("" + valueDataRecovery);
+                count = valueDataRecovery;
 
         }
-
     }
+
 
     public void saveData() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString(COUNTER_VALUE, textViewCounter.getText().toString());
+        editor.putString(COUNTER_VALUE, editTextCounter.getText().toString());
         editor.apply();
 
     }
@@ -89,9 +97,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void updateCounter() {
-        textViewCounter.setText(textSaved);
+        editTextCounter.setText(textSaved);
         buttonDataRecovery.setText(textSaved);
-        count = Integer.parseInt(textViewCounter.getText().toString());
+        count = Integer.parseInt(editTextCounter.getText().toString());
         valueDataRecovery = count;
 
     }
