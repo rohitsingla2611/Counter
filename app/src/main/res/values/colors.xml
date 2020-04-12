@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ABDAD9</color>
-    <color name="colorPrimaryDark">#ABDAD9</color>
-    <color name="colorAccent">#ABDAD9</color>
-    <color name="colorBackground">#ABDAD9</color>#1E5162
-    <color name="colorText">#BB998C</color>
-    <color name="colorBox">#B4D9CA</color>
-
+    <color name="colorPrimary">#DDBDB7</color>
+    <color name="colorPrimaryDark">#AB8D87</color>
+    <color name="colorAccent">#F7D6D0</color>
+    <color name="colorText">#992E1A</color>
+    <color name="colorBox">#D3E2E4</color>
+    #DC4D33#E36F5A#EFD6E8#84A8AE#D8E1C9#E2DAF1
 </resources>
+
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<resources>-->
+    <!--<color name="colorPrimary">#DDBDB7</color>-->
+    <!--<color name="colorPrimaryDark">#AB8D87</color>-->
+    <!--<color name="colorAccent">#F7D6D0</color>-->
+    <!--<color name="colorBox">#BFE4EA</color>-->
+    <!--<color name="colorText">#992E1A</color>#84A8AE-->
+    <!--</resources>-->
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+    <!--<resources>-->
+    <!--    <color name="colorPrimary">#ABDAD9</color>-->
+    <!--    <color name="colorPrimaryDark">#ABDAD9</color>-->
+    <!--    <color name="colorAccent">#ABDAD9</color>-->
+    <!--    <color name="colorBackground">#ABDAD9</color>#1E5162-->
+    <!--    <color name="colorText">#BB998C</color>-->
+    <!--    <color name="colorBox">#B4D9CA</color>-->
+
+    <!--</resources>-->
+
