@@ -3,18 +3,25 @@ package rohitsingla.rdrock.counttimes;
 import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String COUNTER_VALUE = "counterValue";
+    ConstraintLayout counterLayout;
     TextView textViewCounter;
     EditText editTextCounter;
     String textSaved;
@@ -31,8 +38,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initViews();
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     void initViews() {
         editTextCounter = findViewById(R.id.editTextCounter);
+        counterLayout = findViewById(R.id.counterLayout);
+
+        counterLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                assert inputMethodManager != null;
+                inputMethodManager.hideSoftInputFromWindow(Objects.requireNonNull(getCurrentFocus()).getApplicationWindowToken(), 0);
+                return true;
+            }
+        });
         textViewCounter = findViewById(R.id.textViewCounter);
         buttonSetUnsetCounterValue = findViewById(R.id.buttonSetUnsetCounterValue);
         buttonPlusOne = findViewById(R.id.buttonPlusOne);
@@ -100,6 +119,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 textViewCounter.setText("" + count);
                 editTextCounter.setText("" + valueDataRecovery);
                 buttonDataRecovery.setText("" + valueDataRecovery);
+                saveData();
+
             }
         }
     }
@@ -131,6 +152,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @SuppressLint("SetTextI18n")
     void setUnsetCounterValue() {
+        editTextCounter.onEditorAction(EditorInfo.IME_ACTION_DONE);
 
         String inputCounterValue;
         inputCounterValue = editTextCounter.getText().toString();
@@ -149,6 +171,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             editTextCounter.setVisibility(View.INVISIBLE);
             textViewCounter.setVisibility(View.VISIBLE);
             buttonSetUnsetCounterValue.setText("UNSET");
+            saveData();
+
 
         } else {
 
