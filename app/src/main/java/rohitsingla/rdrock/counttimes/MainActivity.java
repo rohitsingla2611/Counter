@@ -33,18 +33,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     void initViews() {
         editTextCounter = findViewById(R.id.editTextCounter);
-
-        Toast.makeText(this, editTextCounter.getText().toString(), Toast.LENGTH_SHORT).show();
-        count = Integer.parseInt(editTextCounter.getText().toString());
-        valueDataRecovery = count;
-        editTextCounter.setVisibility(View.INVISIBLE);
-        textViewCounter.setVisibility(View.VISIBLE);
         textViewCounter = findViewById(R.id.textViewCounter);
+        buttonSetUnsetCounterValue = findViewById(R.id.buttonSetUnsetCounterValue);
         buttonPlusOne = findViewById(R.id.buttonPlusOne);
         buttonReset = findViewById(R.id.buttonReset);
         buttonDataRecovery = findViewById(R.id.buttonDataRecovery);
         buttonMinusOne = findViewById(R.id.buttonMinusOne);
 
+        buttonSetUnsetCounterValue.setOnClickListener(this);
         buttonPlusOne.setOnClickListener(this);
         buttonReset.setOnClickListener(this);
         buttonDataRecovery.setOnClickListener(this);
@@ -58,9 +54,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.textViewCounter:
-                count = Integer.parseInt(textViewCounter.getText().toString());
+            case R.id.buttonSetUnsetCounterValue:
 
+                setUnsetCounterValue();
                 return;
 
             case R.id.buttonPlusOne:
@@ -89,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 count = valueDataRecovery;
 
         }
+
     }
 
 
@@ -105,6 +102,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         textSaved = sharedPreferences.getString(COUNTER_VALUE, "0");
 
+    }
+
+    @SuppressLint("SetTextI18n")
+    void setUnsetCounterValue() {
+
+        String inputCounterValue;
+        inputCounterValue = editTextCounter.getText().toString();
+
+        if (buttonSetUnsetCounterValue.getText().toString().equals("SET")) {
+
+            if (inputCounterValue.isEmpty())
+                count = 0;
+            else
+                count = Integer.parseInt(inputCounterValue);
+
+
+            valueDataRecovery = count;
+            String convertIntToString = Integer.toString(count);
+            textViewCounter.setText(convertIntToString);
+            buttonDataRecovery.setText(convertIntToString);
+            editTextCounter.setText("");
+
+            editTextCounter.setVisibility(View.INVISIBLE);
+            textViewCounter.setVisibility(View.VISIBLE);
+            buttonSetUnsetCounterValue.setText("UNSET");
+
+        } else {
+
+
+            editTextCounter.setVisibility(View.VISIBLE);
+            textViewCounter.setVisibility(View.INVISIBLE);
+            buttonSetUnsetCounterValue.setText("SET");
+
+        }
     }
 
     public void updateCounter() {
