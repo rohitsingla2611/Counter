@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,9 +15,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static final String SHARED_PREFS = "sharedPrefs";
     public static final String COUNTER_VALUE = "counterValue";
+    TextView textViewCounter;
     EditText editTextCounter;
     String textSaved;
-    Button buttonPlusOne, buttonReset, buttonDataRecovery, buttonMinusOne;
+    Button buttonSetUnsetCounterValue;
+    Button buttonPlusOne, buttonReset;
+    Button buttonDataRecovery, buttonMinusOne;
     int count = 0, valueDataRecovery = 0;
     long backKeyPressedTime;
 
@@ -29,6 +33,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     void initViews() {
         editTextCounter = findViewById(R.id.editTextCounter);
+
+        Toast.makeText(this, editTextCounter.getText().toString(), Toast.LENGTH_SHORT).show();
+        count = Integer.parseInt(editTextCounter.getText().toString());
+        valueDataRecovery = count;
+        editTextCounter.setVisibility(View.INVISIBLE);
+        textViewCounter.setVisibility(View.VISIBLE);
+        textViewCounter = findViewById(R.id.textViewCounter);
         buttonPlusOne = findViewById(R.id.buttonPlusOne);
         buttonReset = findViewById(R.id.buttonReset);
         buttonDataRecovery = findViewById(R.id.buttonDataRecovery);
@@ -47,15 +58,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.editTextCounter:
-                count = Integer.parseInt(editTextCounter.getText().toString());
+            case R.id.textViewCounter:
+                count = Integer.parseInt(textViewCounter.getText().toString());
 
                 return;
 
             case R.id.buttonPlusOne:
                 count++;
                 valueDataRecovery = count;
-                editTextCounter.setText("" + count);
+                textViewCounter.setText("" + count);
                 buttonDataRecovery.setText("" + valueDataRecovery);
                 saveData();
                 return;
@@ -64,17 +75,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (count > 0) {
                     count--;
                     valueDataRecovery = count;
-                    editTextCounter.setText("" + count);
+                    textViewCounter.setText("" + count);
                     buttonDataRecovery.setText("" + valueDataRecovery);
                 }
                 return;
             case R.id.buttonReset:
                 count = 0;
-                editTextCounter.setText("" + count);
+                textViewCounter.setText("" + count);
                 return;
             case R.id.buttonDataRecovery:
 
-                editTextCounter.setText("" + valueDataRecovery);
+                textViewCounter.setText("" + valueDataRecovery);
                 count = valueDataRecovery;
 
         }
@@ -85,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString(COUNTER_VALUE, editTextCounter.getText().toString());
+        editor.putString(COUNTER_VALUE, textViewCounter.getText().toString());
         editor.apply();
 
     }
@@ -97,9 +108,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void updateCounter() {
-        editTextCounter.setText(textSaved);
+        textViewCounter.setText(textSaved);
         buttonDataRecovery.setText(textSaved);
-        count = Integer.parseInt(editTextCounter.getText().toString());
+        count = Integer.parseInt(textViewCounter.getText().toString());
         valueDataRecovery = count;
 
     }
