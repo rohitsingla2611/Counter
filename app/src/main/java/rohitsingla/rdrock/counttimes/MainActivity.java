@@ -14,10 +14,11 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String SHARED_PREFS = "sharedPrefs";
-    public static final String COUNTER_VALUE = "counterValue";
+    public static final String TEXT_VIEW_COUNTER_VALUE = "textViewCounterValue";
+    public static final String EDIT_TEXT_COUNTER_VALUE = "editTextCounterValue";
     TextView textViewCounter;
     EditText editTextCounter;
-    String textSaved;
+    String textViewCounterValueSaved, editTextSavedCounterValueSaved;
     Button buttonSetUnsetCounterValue;
     Button buttonPlusOne, buttonReset;
     Button buttonDataRecovery, buttonMinusOne;
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             count++;
             valueDataRecovery = count;
             textViewCounter.setText("" + count);
+            editTextCounter.setText("" + valueDataRecovery);
             buttonDataRecovery.setText("" + valueDataRecovery);
             saveData();
         }
@@ -97,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 count--;
                 valueDataRecovery = count;
                 textViewCounter.setText("" + count);
+                editTextCounter.setText("" + valueDataRecovery);
                 buttonDataRecovery.setText("" + valueDataRecovery);
             }
         }
@@ -108,6 +111,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             count = 0;
             textViewCounter.setText("" + count);
+            editTextCounter.setText("" + valueDataRecovery);
+
         }
     }
 
@@ -116,7 +121,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (buttonSetUnsetCounterValue.getText().toString().equals("UNSET")) {
 
             textViewCounter.setText("" + valueDataRecovery);
+            editTextCounter.setText("" + valueDataRecovery);
             count = valueDataRecovery;
+        } else {
+            editTextCounter.setText("" + valueDataRecovery);
+
         }
     }
 
@@ -136,11 +145,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
             valueDataRecovery = count;
-            String convertIntToString = Integer.toString(count);
-            textViewCounter.setText(convertIntToString);
-            buttonDataRecovery.setText(convertIntToString);
-            editTextCounter.setText("");
-
+            textViewCounter.setText("" + count);
+            buttonDataRecovery.setText("" + valueDataRecovery);
             editTextCounter.setVisibility(View.INVISIBLE);
             textViewCounter.setVisibility(View.VISIBLE);
             buttonSetUnsetCounterValue.setText("UNSET");
@@ -151,15 +157,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             editTextCounter.setVisibility(View.VISIBLE);
             textViewCounter.setVisibility(View.INVISIBLE);
             buttonSetUnsetCounterValue.setText("SET");
+            editTextCounter.setText("");
+
 
         }
     }
 
     public void updateCounter() {
 
-        editTextCounter.setText(textSaved);
-        textViewCounter.setText(textSaved);
-        buttonDataRecovery.setText(textSaved);
+        editTextCounter.setText(editTextSavedCounterValueSaved);
+        textViewCounter.setText(textViewCounterValueSaved);
+        buttonDataRecovery.setText(textViewCounterValueSaved);
         count = Integer.parseInt(textViewCounter.getText().toString());
         valueDataRecovery = count;
 
@@ -169,14 +177,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString(COUNTER_VALUE, textViewCounter.getText().toString());
+        editor.putString(TEXT_VIEW_COUNTER_VALUE, textViewCounter.getText().toString());
+        editor.putString(EDIT_TEXT_COUNTER_VALUE, editTextCounter.getText().toString());
         editor.apply();
 
     }
 
     public void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        textSaved = sharedPreferences.getString(COUNTER_VALUE, "0");
+        textViewCounterValueSaved = sharedPreferences.getString(TEXT_VIEW_COUNTER_VALUE, "0");
+        editTextSavedCounterValueSaved = sharedPreferences.getString(EDIT_TEXT_COUNTER_VALUE, "");
 
     }
 
