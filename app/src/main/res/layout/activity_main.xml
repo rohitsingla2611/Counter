@@ -24,24 +24,55 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.534" />
 
+
     <EditText
         android:id="@+id/editTextCounter"
         android:layout_width="149dp"
         android:layout_height="84dp"
-        android:layout_marginTop="176dp"
+        android:layout_marginTop="180dp"
         android:background="@color/colorBox"
-        android:text="@string/zero"
         android:imeOptions=""
+
         android:inputType="number"
+        android:maxLength="3"
+        android:text="@string/zero"
         android:textAlignment="center"
         android:textColor="@color/colorText"
         android:textSize="60sp"
-        android:maxLength="3"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.259"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textViewCounter"
+        android:layout_width="149dp"
+        android:layout_marginTop="180dp"
+        android:layout_height="84dp"
+        android:maxLength="3"
+        android:background="@color/colorBox"
+        android:visibility="invisible"
+        android:text="@string/zero"
+        android:textAlignment="center"
+        android:textColor="@color/colorText"
+        android:textSize="60sp"
+        app:layout_constraintHorizontal_bias="0.259"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:id="@+id/buttonPlusOne"
+        android:layout_width="100dp"
+        android:layout_height="89dp"
+        android:background="@color/colorBox"
+        android:text="@string/plusOne"
+        android:textAlignment="center"
+        android:textColor="@color/colorText"
+        android:textSize="45sp"
+        tools:layout_editor_absoluteX="226dp"
+        tools:layout_editor_absoluteY="175dp" />
 
     <Button
         android:id="@+id/buttonPlusOne"
