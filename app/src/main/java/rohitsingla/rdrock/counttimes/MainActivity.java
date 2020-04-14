@@ -14,11 +14,10 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String SHARED_PREFS = "sharedPrefs";
-    public static final String TEXT_VIEW_COUNTER_VALUE = "textViewCounterValue";
-    public static final String EDIT_TEXT_COUNTER_VALUE = "editTextCounterValue";
+    public static final String COUNTER_VALUE = "counterValue";
     TextView textViewCounter;
     EditText editTextCounter;
-    String textViewCounterValueSaved, editTextSavedCounterValueSaved;
+    String textSaved;
     Button buttonSetUnsetCounterValue;
     Button buttonPlusOne, buttonReset;
     Button buttonDataRecovery, buttonMinusOne;
@@ -165,9 +164,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void updateCounter() {
 
-        editTextCounter.setText(editTextSavedCounterValueSaved);
-        textViewCounter.setText(textViewCounterValueSaved);
-        buttonDataRecovery.setText(textViewCounterValueSaved);
+        textViewCounter.setText(textSaved);
+        buttonDataRecovery.setText(textSaved);
         count = Integer.parseInt(textViewCounter.getText().toString());
         valueDataRecovery = count;
 
@@ -177,16 +175,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
-        editor.putString(TEXT_VIEW_COUNTER_VALUE, textViewCounter.getText().toString());
-        editor.putString(EDIT_TEXT_COUNTER_VALUE, editTextCounter.getText().toString());
+        editor.putString(COUNTER_VALUE, textViewCounter.getText().toString());
         editor.apply();
 
     }
 
     public void loadData() {
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-        textViewCounterValueSaved = sharedPreferences.getString(TEXT_VIEW_COUNTER_VALUE, "0");
-        editTextSavedCounterValueSaved = sharedPreferences.getString(EDIT_TEXT_COUNTER_VALUE, "");
+        textSaved = sharedPreferences.getString(COUNTER_VALUE, "0");
 
     }
 
